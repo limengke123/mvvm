@@ -1,3 +1,5 @@
+import Dep from './dep'
+
 export default class Watcher {
     constructor(vm, expOrFn, cb){
         this.depIds = {} // hash储存订阅者的id,避免重复的订阅者

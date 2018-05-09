@@ -1,4 +1,5 @@
 import Watcher from "./watcher";
+import {observe} from './observer'
 
 class Mvvm {
     constructor(options) {

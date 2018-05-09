@@ -38,3 +38,7 @@ function observe(val) {
     if (!val || typeof val !== 'object') return
     return new Observer(val)
 }
+
+export {
+    observe
+}
