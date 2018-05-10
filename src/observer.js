@@ -4,6 +4,12 @@ export default class Observer {
     constructor(value){
         this.value = value
         this.walk(value)
+        Object.defineProperty(value, '__ob__',{
+            value: this,
+            enumerable: false,
+            writable: true,
+            configurable: true
+        })
     }
     walk(value) {
         Object.keys(value).forEach(key => this.convert(key, value[key]))
@@ -21,6 +27,7 @@ function defineReactive(obj, key, val) {
         configurable: true,
         get: () => {
             if(Dep.target){
+                dep.addSub(Dep.target)
                 dep.depend()
             }
             return val
@@ -36,7 +43,15 @@ function defineReactive(obj, key, val) {
 
 function observe(val) {
     if (!val || typeof val !== 'object') return
-    return new Observer(val)
+
+    let ob 
+
+    if(val.hasOwnProperty('__ob__') && val.__ob__ instanceof Observer) {
+        ob = val.__ob__
+    } else {
+        ob = new Observer(val)
+    }
+    return ob
 }
 
 export {

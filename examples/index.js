@@ -1,6 +1,10 @@
+debugger
 let mvvm = new Mvvm({
     data:{
-        text:""
+        text:"",
+        outer: {
+            inner:"test"
+        }
     }
 })
 
@@ -12,6 +16,5 @@ input.addEventListener('keyup', e => {
 })
 
 mvvm.$watch('text', str => {
-    console.log(p)
-    p.innerHTML = str
+    p.innerText = str
 })

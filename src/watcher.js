@@ -19,7 +19,6 @@ export default class Watcher {
     }
     run() {
         const val = this.get()
-        console.log(val)
         if(val !== this.val) {
             this.val = val
             this.cb.call(this.vm, val)
